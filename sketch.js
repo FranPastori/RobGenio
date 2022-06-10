@@ -68,7 +68,7 @@ function exibirCaixaDeResposta(){
 
 function keyPressed (){
   if (keyCode === ENTER){
-    if(respostaValida){
+    if(respostaValida()){
     descobrirNome();
     }
     caixaDeTexto.value("");
