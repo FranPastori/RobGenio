@@ -9,6 +9,8 @@ let imagemBalao;
 
 let numeroDaPergunta = 0 ;
 let caixaDeTexto;
+let nome="";
+
 
 function preload( ) {
   imagemFundo = loadImage('fundo.jpg');
@@ -42,16 +44,61 @@ function mousePressed(){
 
 function perguntar(){
   if (numeroDaPergunta == 1){
-    image (imagemBalao, 330,20,285,150)
-    textSize(14)
-    textAlign(CENTER)
-    textStyle(BOLD)
-    text ("Qual seu livro favorito?",480,80) 
-  
+    chamaCena("Qual seu livro favorito?")}
+  else if (numeroDaPergunta == 2){
+    chamaCena("Qual seu filme favorito?");
+  } 
+ else if (numeroDaPergunta == 3){
+    chamaCena("Qual sua fruta favorita?");
   }
+ else if (numeroDaPergunta == 4){
+    chamaCena("Qual sua fruta favorita?");
+  }
+else { 
+    chamaCena("Seu Nome é \n")
+    revelarNome();}
+    
 }
 function exibirCaixaDeResposta(){
   caixaDeTexto.position(60,360);
   caixaDeTexto.size(450,20);
-  
+  caixaDeTexto.elt.placeholder="Responda aqui e pressione a tecla enter"
 }
+
+
+function keyPressed (){
+  if (keyCode === ENTER){
+    if(respostaValida){
+    descobrirNome();
+    }
+    caixaDeTexto.value("");
+  
+  }
+    }
+  
+function descobrirNome(){
+ let texto =  caixaDeTexto.value();
+ if (texto.includes("."))
+ {nome= nome + texto[0];};
+  numeroDaPergunta++;
+  perguntar();
+}
+function chamaCena (pergunta){
+    image (imagemBalao, 330,20,285,150)
+    textSize(14)
+    textAlign(CENTER)
+    textStyle(BOLD)
+    text (pergunta,480,80)
+    
+}
+function revelarNome(){
+  caixaDeTexto.remove(); 
+  textSize(50);
+  textAlign(CENTER);
+  text( nome,450,120);
+}
+function respostaValida(){
+  
+  return !caixaDeTexto.value()=="";
+}
+  
